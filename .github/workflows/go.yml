@@ -52,4 +52,4 @@ jobs:
         templ generate
         go build -v ./..
       env: 
-        WORK_KEY: ${{ secrets.WORK_KEY }}
+        GH_TOKEN: ${{ secrets.WORK_KEY }}
