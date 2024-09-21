@@ -34,7 +34,7 @@ jobs:
 
     - name: Build
       run:
-        go build ./..
+        go build ./cmd/server/main.go
       env: 
         GH_TOKEN: ${{ secrets.WORK_KEY }}
     
