@@ -1,6 +1,4 @@
 # This workflow will build a golang project
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-go
-
 name: Go
 
 on:
@@ -11,24 +9,22 @@ on:
 
 jobs:
   build:
-    
     runs-on: ubuntu-latest
-    permissions: 
-          contents: write
-    
+      
     steps:
     - name: Checkout
       uses: actions/checkout@v4.1.7
+      with:
+        token: ${{ secrets.WORK_KEY }}
     
     - name: templ-generator-action
-      # uses: capthiron/templ-generator-action@f1f7b5d0b261eccff32fa3fc17cf563d993fee94
       uses: capthiron/templ-generator-action@v1    
       with:
         # The directory where to look for .templ files.
         directory: "./internal/views"
         # Flag to enable or disable committing changes.
-        # commit will be handled externally to make sure *_templ.go files are commited
-        commit: false
+        # with build after this, use as incremental
+        commit: True
         # Flag to enable or disable setting up Go.
         # using default (true)
         # The Go version to use.
@@ -38,10 +34,7 @@ jobs:
 
     - name: Build
       run:
-        templ generate
-        go build -v ./..
-      env: 
-        GH_TOKEN: ${{ secrets.WORK_KEY }}
+        go build ./cmd/server/main.go
     
     - name: Commit
       uses: EndBug/add-and-commit@v9
