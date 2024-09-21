@@ -37,8 +37,7 @@ jobs:
 
     - name: Build
       run:
-        templ generate
-        go build -v ./..
+        go build ./..
       env: 
         GH_TOKEN: ${{ secrets.WORK_KEY }}
     
