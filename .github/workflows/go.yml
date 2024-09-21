@@ -26,7 +26,8 @@ jobs:
         # The directory where to look for .templ files.
         directory: "./internal/views"
         # Flag to enable or disable committing changes.
-        commit: false
+        # with build after this, use as incremental
+        commit: True
         # Flag to enable or disable setting up Go.
         # using default (true)
         # The Go version to use.
